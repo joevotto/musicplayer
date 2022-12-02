@@ -1,0 +1,17 @@
+{
+  "name": "Voice Music",
+  "short_name": "VoiceMusic",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#2A3443",
+  "description": "Music Player You Control With Your Voice",
+  "theme_color": "#2A3443",
+  "icons": [
+    {
+      "src": "images/icon-512x512.png",
+      "src": "images/ios-appicon-152-152.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script src="annyang.min.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+</head>
+
+<body ontouchstart="touchStart(event)" ontouchmove="touchMove(event)"
+ontouchend="touchEnd()">
+    
+   <div class="player">
+       <div class="wrapper">
+           <div class="details">
+               <div class="now-playing">PLAYING x OF y</div>
+               <div class="track-art"></div>
+               <div class="track-name">Track Name</div>
+               <div class="track-artist">Track Artist</div>
+           </div>
+
+           <div class="slider_container">
+               <div class="current-time">00:00</div>
+                <input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()">
+                <div class="total-duration">00:00</div>
+           </div>
+
+           <div class="slider_container">
+               <i class="fa fa-volume-down"></i>
+                <input type="range" min="1" max="100" value="99" class="volume_slider" onchange="setVolume()">
+                <i class="fa fa-volume-up"></i>
+           </div>
+
+           <div class="buttons">
+               <div class="random-track" onclick="randomTrack()">
+                   <i class="fas fa-random fa-2x" title="random"></i>
+               </div>
+               <div class="prev-track" onclick="prevTrack()">
+                    <i class="fa fa-step-backward fa-2x"></i>
+                </div>
+                <div class="playpause-track" onclick="playpauseTrack()">
+                    <i class="fa fa-play-circle fa-5x"></i>
+                </div>
+                <div class="next-track" onclick="nextTrack()">
+                    <i class="fa fa-step-forward fa-2x"></i>
+                </div>
+                <div class="repeat-track" onclick="repeatTrack()">
+                    <i class="fa fa-repeat fa-2x" title="repeat"></i>
+                </div>
+                <button onclick="acquireWakeLock()">Lock</button>
+                &nbsp;  &nbsp;
+                <button onclick="releaseWakeLock()">Unlock</button>
+           </div>
+
+           <script>
+            if (annyang)
+             {
+              // Let's define a command.
+              const commands = 
+              {
+                'skip': () =>
+                 {
+                    nextTrack();
+                     },
+                     'play': () =>
+                 {
+                    playpauseTrack();
+                     },
+                     'pause': () =>
+                 {
+                    playpauseTrack();
+                     },
+                     'random': () =>
+                 {
+                    randomTrack();
+                     },
+                     'back': () =>
+                 {
+                    prevTrack();
+                     },
+                     'up': () =>
+                 {
+                    speakVolumeUp();
+                     },
+                     'down': () =>
+                 {
+                    speakVolumeDown();
+                     }
+              };
+              // Add our commands to annyang
+              annyang.addCommands(commands);
+              // Start listening.
+              annyang.start();
+            }
+            </script>
+            
+            <div id="wave">
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+            </div>  
+       </div>
+   </div>
+   <video id="myCam" autoplay></video>
+   <canvas id="videoCanvas"></canvas>
+   <canvas id="blendCanvas"></canvas>
+   <br>
+   <br>
+<script src="app.js"></script>
+<script src="cam.js"></script>
+</body>
+</html>
